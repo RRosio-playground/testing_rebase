@@ -8,8 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     strategy:
       matrix:
-        os:
-          - ubuntu
+        os: [ubuntu, macos]
         router:
           - someIssue:actions_dummy
     steps:
