@@ -3,7 +3,7 @@
   id: transfer-issue
   with:
     token: ${{ secrets.moveSomeIssues }}
-    router: someIssue:testing_rebase
+    router: someIssue:actions_dummy
 - name: Update Transferred Issue
   uses: actions/github-script@v5
   if: steps.transfer-issue.outputs.new_issue_number != ''
