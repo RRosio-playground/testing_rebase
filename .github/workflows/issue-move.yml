@@ -33,16 +33,16 @@ jobs:
         with:
           debug: true
           script: |
-          try {
-              await github.rest.issues.createComment({
-                issue_number: `${{ steps.transfer-issue.outputs.new_issue_number}}`,
-                owner: context.repo.owner,
-                repo: `${{ steps.transfer-issue.outputs.destinatiom_repo }}`,
-                body: `@${ context.payload.issue.user.login } your issue is over here now!`
-              });
-          } catch (error) {
-            core.setFailed(error.message)
-          }
+            try {
+                await github.rest.issues.createComment({
+                  issue_number: `${{ steps.transfer-issue.outputs.new_issue_number}}`,
+                  owner: context.repo.owner,
+                  repo: `${{ steps.transfer-issue.outputs.destinatiom_repo }}`,
+                  body: `@${ context.payload.issue.user.login } your issue is over here now!`
+                });
+            } catch (error) {
+              core.setFailed(error.message)
+            }
       - name: Close transferred issue
         if: steps.test_action.outputs.new_issue_number != ''
         uses: actions/github-script@v5
