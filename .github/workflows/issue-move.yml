@@ -17,7 +17,7 @@ jobs:
         uses: lando/transfer-issue-action@v2
         id: transfer-issue
         with:
-          token: ${{ secrets.moveSomeIssues }}
+          token: ${{ secrets.MOVEISSUES }}
           apply_label: MOVED TO ACTIONS_DUMMY
           router: ${{ matrix.router}}
           debug: true
