@@ -4,6 +4,10 @@
   with:
     token: ${{ secrets.moveSomeIssues }}
     router: someIssue:actions_dummy
+  on:
+  issues:
+    types:
+      - labeled
 - name: Update Transferred Issue
   uses: actions/github-script@v5
   if: steps.transfer-issue.outputs.new_issue_number != ''
