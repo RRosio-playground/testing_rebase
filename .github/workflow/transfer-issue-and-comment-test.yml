@@ -4,10 +4,12 @@
   with:
     token: ${{ secrets.moveSomeIssues }}
     router: someIssue:actions_dummy
+    debug: true
 - name: Update Transferred Issue
   uses: actions/github-script@v5
   if: steps.transfer-issue.outputs.new_issue_number != ''
   with:
+    debug: true
     script: |
       await github.rest.issues.createComment({
         issue_number: `${{ steps.transfer-issue.outputs.new_issue_number}}`,
