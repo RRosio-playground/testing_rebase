@@ -1,0 +1,17 @@
+- name: Transfer Issue & Comment
+  uses: lando/transfer-issue-action@v2
+  id: transfer-issue
+  with:
+    token: ${{ secrets.moveSomeIssues }}
+    router: someIssue:testing_rebase
+- name: Update Transferred Issue
+  uses: actions/github-script@v5
+  if: steps.transfer-issue.outputs.new_issue_number != ''
+  with:
+    script: |
+      await github.rest.issues.createComment({
+        issue_number: `${{ steps.transfer-issue.outputs.new_issue_number}}`,
+        owner: context.repo.owner,
+        repo: `${{ steps.transfer-issue.outputs.destinatiom_repo }}`,
+        body: `@${ context.payload.issue.user.login } your issue is over here now!`
+      });
