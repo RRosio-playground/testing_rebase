@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Transfer Issue & Comment
-        uses: RRosio-playground/transfer-issue-action
+        uses: RRosio-playground/transfer-issue-action@v3
         id: transfer-issue
         with:
           token: ${{ secrets.MOVEISSUES }}
