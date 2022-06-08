@@ -18,7 +18,7 @@ jobs:
         id: transfer-issue
         with:
           token: ${{ secrets.MOVEISSUES }}
-          apply_label: MOVED TO ACTIONS_DUMMY
+          apply_label: "MOVED TO ACTIONS_DUMMY:009BBE"
           router: ${{ matrix.router}}
           debug: true
       - name: Echo Output Data

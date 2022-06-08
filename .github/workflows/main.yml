@@ -1,3 +1,4 @@
+name: Run Simple Docker Action 
 on: [push]
 
 jobs:
