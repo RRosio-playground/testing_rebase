@@ -12,7 +12,7 @@ jobs:
         router:
           - someIssue:actions_dummy
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Transfer Issue & Comment
         uses: RRosio-playground/transfer-issue-action@v3.0.0
         id: transfer-issue
