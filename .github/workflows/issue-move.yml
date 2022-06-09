@@ -45,7 +45,7 @@ jobs:
             }
       - name: Close transferred issue
         if: steps.test_action.outputs.new_issue_number != ''
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6.0.0
         with:
           debug: true
           script: |
