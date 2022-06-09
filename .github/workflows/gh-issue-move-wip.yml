@@ -1,4 +1,4 @@
-name: Test Transfer Issue and Comment
+name: Second Test Transfer Issue and Comment
 on: [push]
 
 jobs:
@@ -8,8 +8,10 @@ jobs:
       matrix:
         os: [ubuntu]
     steps:
-      - uses: actions/checkout@v3
-      - name: Look at System
-        run: pwd
-        run: ls
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      # - name: View Working Directory
+      #   run: pwd
+      # - name: View Files in Working Directory
+      #   run: ls
   
