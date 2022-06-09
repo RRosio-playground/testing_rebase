@@ -4,10 +4,7 @@ on:
     types:
       - labeled
 permissions:
-  issues: write
-  pull-requests: write
-  contents: write
-  discussions: write
+  issues: read-all|write-all
 
 jobs:
   test-action:
