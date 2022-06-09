@@ -38,6 +38,7 @@ jobs:
         uses: actions/github-script@v5
         if: steps.transfer-issue.outputs.new_issue_number != ''
         with:
+          token: ${{ secrets.MOVEISSUES }}
           script: |
             await github.rest.issues.createComment({
               issue_number: `${{ steps.transfer-issue.outputs.new_issue_number}}`,
