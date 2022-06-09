@@ -6,33 +6,31 @@ on:
 
 jobs:
   test-action:
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu]
         router:
           - someIssue:actions_dummy
     steps:
       - uses: actions/checkout@v3
       - name: Transfer Issue & Comment
-        uses: RRosio-playground/transfer-issue-action@v3.0.0
+        uses: lando/transfer-issue-action@v2.0.3
         id: transfer-issue
         with:
           token: ${{ secrets.MOVEISSUES }}
           # make a variable for src repo in string bellow 
           apply_label: "Transferred from testing_rebase:009BBE"
           router: ${{ matrix.router}}
-          # create_stub: true
           debug: true
       - name: Echo Output Data
         run: |
           echo "DESTINATION REPO: ${{steps.transfer-issue.outputs.destination_repo}}"
           echo "NEW ISSUE NUMBER: ${{steps.transfer-issue.outputs.new_issue_number}}"
           echo "NEW ISSUE URL: ${{steps.transfer-issue.outputs.new_issue_url}}"
-      - name: GitHub Script
-        uses: actions/github-script@v6.1.0
-        with:
-          script: return "Hello!"
+      # - name: GitHub Script
+      #   uses: actions/github-script@v6.1.0
+      #   with:
+      #     script: return "Hello!"
       - name: Update Transferred Issue
         uses: actions/github-script@v5
         if: steps.transfer-issue.outputs.new_issue_number != ''
@@ -43,5 +41,5 @@ jobs:
               issue_number: `${{ steps.transfer-issue.outputs.new_issue_number}}`,
               owner: context.repo.owner,
               repo: `${{ steps.transfer-issue.outputs.destination_repo }}`,
-              body: `@${ context.payload.issue.user.login } your issue is over here now!`
+              body: `@${ context.payload.issue.user.login } your issue is over here now as it belongs to this repo!`
             });
