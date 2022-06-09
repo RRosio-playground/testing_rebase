@@ -27,8 +27,8 @@ jobs:
           echo "NEW ISSUE NUMBER: ${{steps.test_action.outputs.new_issue_number}}"
           echo "NEW ISSUE URL: ${{steps.test_action.outputs.new_issue_url}}"
           echo "STUB ISSUE NUMBER: ${{steps.test_action.outputs.stub_issue_number}}"
+      - uses: actions/github-script@v5
       - name: Update Transferred Issue
-        uses: actions/github-script@v5
         if: steps.transfer-issue.outputs.new_issue_number != ''
         with:
           debug: true
