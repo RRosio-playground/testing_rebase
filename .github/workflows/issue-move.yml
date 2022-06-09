@@ -3,6 +3,10 @@ on:
   issues:
     types:
       - labeled
+permissions:
+  issues: write
+  pull-requests: write
+  
 jobs:
   test-action:
     runs-on: ${{ matrix.os }}-latest
