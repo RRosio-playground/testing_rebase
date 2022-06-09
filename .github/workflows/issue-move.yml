@@ -30,6 +30,8 @@ jobs:
           echo "NEW ISSUE URL: ${{steps.transfer-issue.outputs.new_issue_url}}"
       - name: GitHub Script
         uses: actions/github-script@v6.1.0
+        with:
+          script: return "Hello!"
       - name: Update Transferred Issue
         uses: actions/github-script@v5
         if: steps.transfer-issue.outputs.new_issue_number != ''
