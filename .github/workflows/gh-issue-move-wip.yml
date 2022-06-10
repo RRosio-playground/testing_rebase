@@ -18,10 +18,6 @@ jobs:
       #   run: pwd
       # - name: View Files in Working Directory
       #   run: ls
-        outputs: 
-          event: ${{ github.event }}
-      - name: Set Output Data and Echo it
+      - name: Dump Github Event
         run: |
-          echo "::set-output name=SRC_REPO::${{ steps.repo-event.outputs.event }}"
           echo "Event: ${{ github.event }}"
-          echo "Event from wworkflow ${{ steps.repo-event.outputs.event }}"
