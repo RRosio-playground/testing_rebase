@@ -18,11 +18,10 @@ jobs:
       #   run: pwd
       # - name: View Files in Working Directory
       #   run: ls
-        output: 
-          event: ${{ context.payload.repository }}
-          sourceIssue: ${{ context.payload.issue }}
-          sourceLabel: ${{ context.payload.label }}
-          github-token: ${{ secrets.MOVEISSUES }}
-      - name: Set Output Data
+        outputs: 
+          event: ${{ github.event }}
+      - name: Set Output Data and Echo it
         run: |
           echo "::set-output name=SRC_REPO::${{ steps.repo-event.outputs.event }}"
+          echo "Event: ${{ github.event }}"
+          echo "Event from wworkflow ${{ steps.repo-event.outputs.event }}"
