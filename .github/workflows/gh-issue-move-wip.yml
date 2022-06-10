@@ -12,19 +12,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Transfer Issue
+        id: repo-event
         uses: actions/github-script@v5
       # - name: View Working Directory
       #   run: pwd
       # - name: View Files in Working Directory
       #   run: ls
+        output: 
+          event: ${{ context.payload.repository }}
+          sourceIssue: ${{ context.payload.issue }}
+          sourceLabel: ${{ context.payload.label }}
+          github-token: ${{ secrets.MOVEISSUES }}
       - name: Set Output Data
         run: |
-          echo "::set-output name=SRC_REPO::${{ context.payload.repository }}"
-          echo "::set-output name=SRC_ISSUE::${{ context.payload.issue }}"
-          echo "::set-output name=SRC_LABEL::${{ context.payload.label }}"
-          echo "context: ${{ contex }}"
-      - name: Echo Context Data
-        run: |
-          echo "SOURCE REPO: ${{ context.payload.repository }}"
-          echo "SOURCE ISSUE: ${{ context.payload.issue }}"
-          echo "SOURCE LABEL: ${{ context.payload.label }}"
+          echo "::set-output name=SRC_REPO::${{ steps.repo-event.outputs.event }}"
