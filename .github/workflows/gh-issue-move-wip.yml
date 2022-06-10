@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Transfer Issue
-        id: repo-event
-        uses: actions/github-script@v5
+      # - name: Transfer Issue
+      #   id: repo-event
+      #   uses: actions/github-script@v5
       # - name: View Working Directory
       #   run: pwd
       # - name: View Files in Working Directory
