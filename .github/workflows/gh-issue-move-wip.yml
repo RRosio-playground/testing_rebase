@@ -1,17 +1,30 @@
-name: Second Test Transfer Issue and Comment
-on: [push]
+name: gh CLI Move Issue and Comment
+on:
+  issues:
+    types:
+      - labeled
+    if: github.event.label == 'someIssue'
 
 jobs:
-  test-action:
-    runs-on: ${{ matrix.os }}-latest
-    strategy:
-      matrix:
-        os: [ubuntu]
+  move-issue-and-comment:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+      - name: Transfer Issue
+        uses: actions/github-script@v5
       # - name: View Working Directory
       #   run: pwd
       # - name: View Files in Working Directory
       #   run: ls
-  
+      - name: Set Output Data
+        run: |
+          echo "::set-output name=SRC_REPO::${{ context.payload.repository }}"
+          echo "::set-output name=SRC_ISSUE::${{ context.payload.issue }}"
+          echo "::set-output name=SRC_LABEL::${{ context.payload.label }}"
+          echo "context: ${{ contex }}"
+      - name: Echo Context Data
+        run: |
+          echo "SOURCE REPO: ${{ context.payload.repository }}"
+          echo "SOURCE ISSUE: ${{ context.payload.issue }}"
+          echo "SOURCE LABEL: ${{ context.payload.label }}"
