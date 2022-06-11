@@ -1,0 +1,63 @@
+name: Display Contexts
+on:
+  issues:
+    types:
+      - labeled
+    if: github.event.label == 'someIssue'
+
+jobs:
+  move-issue-and-comment:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        router:
+          - someIssue:actions_dummy
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump GitHub Event context
+        env:
+          GITHUB_EVENT_CONTEXT: ${{ toJson(github.event) }}
+        run: echo "$GITHUB_EVENT_CONTEXT"
+      - name: Access Issue Event
+        env:
+          GITHUB_EVENT_ISSUE_CONTEXT: ${{ toJson(github.event.issue) }}
+        run: echo "$GITHUB_EVENT_ISSUE_CONTEXT"
+      - name: Details of Issue Event 
+        env:
+          GITHUB_EVENT_ISSUE_ID: ${{ toJson(github.event.issue.id) }}
+          GITHUB_EVENT_ISSUE_LABELS_NAME: ${{ toJson(github.event.issue.labels.name) }}
+          GITHUB_EVENT_ISSUE_CONTEXT: ${{ toJson(github.event.issue) }}
+        run: |
+          echo "$GITHUB_EVENT_ISSUE_ID"
+          echo "$GITHUB_EVENT_ISSUE_LABELS_NAME"
+          echo "$GITHUB_EVENT_ISSUE_CONTEXT"
+      - name: Execute Script
+        uses: actions/github-script@v6.1.0
+        id: script-test
+        with:
+          script: |
+            console.log(context);
+      - name: GitHub GraphQL API Query
+        uses: octokit/graphql-action@v2.2.1
+# need the source repo login name
+
+# need the target repo name
+# need the source issue label name
+
+  # need to create a graphQL mutation that will transfer the issue
+    # transferIssue [input it requires:
+      # clientMutattionId
+      # repositoryId
+      # issueId
+      # issue 
+        # number]
+
+  # GraphQl mutation above should return the new issue from which we grab:
+    # transferIssue.issue.number
+    # newIssueUrl can be constructed with a string that takes in:
+      # sourceRepo.owner.login (org name)
+      # target Repo name
+      # newIssueNumber
