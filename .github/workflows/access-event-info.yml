@@ -42,6 +42,8 @@ jobs:
             console.log(context);
       - name: GitHub GraphQL API Query
         uses: octokit/graphql-action@v2.2.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 # need the source repo login name
 
 # need the target repo name
